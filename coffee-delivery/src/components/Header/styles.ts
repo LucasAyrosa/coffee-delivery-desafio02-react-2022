@@ -39,6 +39,7 @@ export const Location = styled.span`
 
     span {
         color: ${props => props.theme["purple-dark"]};
+        font-size: 0.875rem;
     }
 `;
 
