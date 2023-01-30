@@ -1,10 +1,11 @@
 import styled from "styled-components";
 
 export const HeaderContainer = styled.header`
+    background: ${props => props.theme.background};
     position: fixed;
     top: 0;
     width: calc(100% - 1rem);
-    max-width: calc(1120px - 1rem);
+    max-width: calc(1136px - 1rem);
     overflow: hidden;
 
     display: flex;
