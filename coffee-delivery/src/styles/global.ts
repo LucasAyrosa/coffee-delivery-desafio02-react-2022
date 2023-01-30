@@ -23,4 +23,8 @@ export const GlobalStyles = createGlobalStyle`
         font-size: 1rem;
         line-height: 130%;
     }
+
+    button {
+        cursor: pointer;
+    }
 `

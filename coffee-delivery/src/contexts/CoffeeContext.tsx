@@ -1,5 +1,5 @@
 import { createContext, ReactNode, useEffect, useReducer } from "react";
-import { addCoffeeInCartAction } from "../reducers/coffees/actions";
+import { addCoffeeInCartAction, subtractCoffeeInCartAction, removeCoffeeFromCartAction } from "../reducers/coffees/actions";
 import { CartItem, CoffeesReducer, CoffeeState } from "../reducers/coffees/reducers";
 
 export enum CoffeeTypes {
@@ -21,8 +21,10 @@ export interface Coffee {
 
 interface CoffeeContextType {
     coffees: Coffee[],
-    cartItems: CartItem[]
-    addCoffeeInCart: (coffeeId: string, amount: number) => void
+    cartItems: CartItem[],
+    addCoffeeInCart: (coffeeId: string, amount: number) => void,
+    subtractCoffeeInCart: (coffeeId: string, amount: number) => void,
+    removeCoffeeFromCart: (coffeeId: string) => void
 }
 
 export const CoffeeContext = createContext({} as CoffeeContextType);
@@ -169,13 +171,23 @@ export function CoffeeContextProvider({ children }: CoffeeContextProviderProsp) 
     function addCoffeeInCart(coffeeId: string, amount: number) {
         dispatch(addCoffeeInCartAction(coffeeId, amount));
     }
+    
+    function subtractCoffeeInCart(coffeeId: string, amount: number) {
+        dispatch(subtractCoffeeInCartAction(coffeeId, amount));
+    }
+
+    function removeCoffeeFromCart(coffeeId: string) {
+        dispatch(removeCoffeeFromCartAction(coffeeId));
+    }
 
     return (
         <CoffeeContext.Provider
             value={{
                 coffees,
                 cartItems,
-                addCoffeeInCart
+                addCoffeeInCart,
+                subtractCoffeeInCart,
+                removeCoffeeFromCart
             }}
         >
             {children}

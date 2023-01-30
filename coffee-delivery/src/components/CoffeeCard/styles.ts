@@ -122,5 +122,7 @@ export const CoffeeCounter = styled.div`
         padding: 0.25rem;
 
         font-weight: bold;
+
+        cursor: pointer;
     }
 `;
