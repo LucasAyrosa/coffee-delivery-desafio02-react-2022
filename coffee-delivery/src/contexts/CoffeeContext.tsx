@@ -1,6 +1,6 @@
 import { createContext, ReactNode, useEffect, useReducer } from "react";
 import { addCoffeeInCartAction } from "../reducers/coffees/actions";
-import { CoffeesReducer, CoffeeState } from "../reducers/coffees/reducers";
+import { CartItem, CoffeesReducer, CoffeeState } from "../reducers/coffees/reducers";
 
 export enum CoffeeTypes {
     tradicional = 'Tradicional',
@@ -20,7 +20,9 @@ export interface Coffee {
 }
 
 interface CoffeeContextType {
-    coffees: Coffee[]
+    coffees: Coffee[],
+    cartItems: CartItem[]
+    addCoffeeInCart: (coffeeId: string, amount: number) => void
 }
 
 export const CoffeeContext = createContext({} as CoffeeContextType);
@@ -160,7 +162,9 @@ export function CoffeeContextProvider({ children }: CoffeeContextProviderProsp) 
         localStorage.setItem('@coffee-delivery:coffee-state-1.0.0', stateJSON);
     }, [coffeeState])
 
-    const { coffees } = coffeeState;
+    console.log(coffeeState)
+
+    const { coffees, cartItems } = coffeeState;
 
     function addCoffeeInCart(coffeeId: string, amount: number) {
         dispatch(addCoffeeInCartAction(coffeeId, amount));
@@ -169,7 +173,9 @@ export function CoffeeContextProvider({ children }: CoffeeContextProviderProsp) 
     return (
         <CoffeeContext.Provider
             value={{
-                coffees
+                coffees,
+                cartItems,
+                addCoffeeInCart
             }}
         >
             {children}

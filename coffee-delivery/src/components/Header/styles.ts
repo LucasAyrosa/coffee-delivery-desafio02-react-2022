@@ -6,7 +6,6 @@ export const HeaderContainer = styled.header`
     top: 0;
     width: calc(100% - 1rem);
     max-width: calc(1136px - 1rem);
-    overflow: hidden;
 
     display: flex;
     align-items: center;
@@ -53,5 +52,21 @@ export const Cart = styled.span`
         background: ${props => props.theme["yellow-light"]};
         color: ${props => props.theme["yellow-dark"]};
         border-radius: 6px;
+
+        span {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            transform: translate(100%, -100%);
+    
+            background: ${props => props.theme["yellow-dark"]};
+            border-radius: 1000px;
+            
+            font-size: 0.75rem;
+            text-align: center;
+            font-weight: 700;
+            color: ${props => props.theme.white};
+        }
     }
+
 `;

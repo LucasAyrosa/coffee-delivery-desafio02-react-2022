@@ -12,8 +12,8 @@ export const CoffeeCardContainer = styled.div`
     align-items: center;
 
     img {
-        /* position: absolute;
-        top: -20px; */
+        position: absolute;
+        transform: translate(0, -20px);
     }
 `;
 
@@ -93,6 +93,10 @@ export const ButtonCart = styled.button`
     color: ${props => props.theme.white};
     padding: 0.5rem;
     cursor: pointer;
+    
+    &:hover {
+        background: ${props => props.theme["purple"]};
+    }
 `;
 
 export const CoffeeCounter = styled.div`

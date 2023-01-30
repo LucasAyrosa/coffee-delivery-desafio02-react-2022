@@ -1,13 +1,15 @@
-import { Coffee } from "../../contexts/CoffeeContext"
+import { Coffee, CoffeeContext } from "../../contexts/CoffeeContext"
 import { ButtonCart, BuyActions, CoffeeBuy, CoffeeCardContainer, CoffeeCounter, CoffeeDescription, CoffeeName, CoffeeTag, CoffeeTags } from "./styles"
 import { ShoppingCart } from 'phosphor-react';
-import { useState } from "react";
+import { useContext, useState } from "react";
 
 interface CoffeeCardProps {
     coffee: Coffee
 }
 
 export function CoffeeCard({ coffee }: CoffeeCardProps) {
+    const { addCoffeeInCart } = useContext(CoffeeContext);
+
     const [coffeeAmount, setCoffeeAmount] = useState(0);
 
     const handleSumCount = () => {
@@ -20,6 +22,11 @@ export function CoffeeCard({ coffee }: CoffeeCardProps) {
             if(newState < 0) return 0;
             return newState;
         });
+    }
+
+    const handleAddCoffeeInCart = (coffeeId: string) => {
+        addCoffeeInCart(coffeeId, coffeeAmount);
+        setCoffeeAmount(0);
     }
 
     return (
@@ -42,7 +49,7 @@ export function CoffeeCard({ coffee }: CoffeeCardProps) {
                         <span>{coffeeAmount}</span>
                         <button onClick={handleSumCount}>+</button>
                     </CoffeeCounter>
-                    <ButtonCart>
+                    <ButtonCart onClick={() => handleAddCoffeeInCart(coffee.id)}>
                         <ShoppingCart size={22} weight='fill' />
                     </ButtonCart>
                 </BuyActions>
